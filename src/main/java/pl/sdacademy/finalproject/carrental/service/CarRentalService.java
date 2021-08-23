@@ -2,14 +2,14 @@ package pl.sdacademy.finalproject.carrental.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.sdacademy.finalproject.carrental.datalayer.CarRepository;
+import pl.sdacademy.finalproject.carrental.datalayer.CarRentalRepository;
 import pl.sdacademy.finalproject.carrental.datalayer.RentCar;
 
 @Service
 public class CarRentalService {
-    private final CarRepository carRepository;
+    private final CarRentalRepository carRepository;
 
-    public CarRentalService(CarRepository carRepository) {
+    public CarRentalService(CarRentalRepository carRepository) {
         this.carRepository = carRepository;
     }
 

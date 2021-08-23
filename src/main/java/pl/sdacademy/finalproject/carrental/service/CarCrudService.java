@@ -9,6 +9,7 @@ import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
 import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,22 +32,30 @@ public class CarCrudService {
     }
 
 
-    public String removeCar(String plate) {
-        try {
+    public void removeCar(String plate) {
             carRepository.deleteById(plate);
-            return "Succesfully deleted";
-        } catch (Exception e) {
-            throw new NotFoundException("the car was not found");
-        }
     }
 
     public Car updateCar(String plate, BigDecimal cost, Integer mileage, CarRentStatus status) {
+        if (mileage == null){
+            mileage = carRepository.findById(plate).get().getMileage();
+        }
+        if (cost == null) {
+            cost = carRepository.findById(plate).get().getCost();
+        }
+        if (status == null) {
+            status = carRepository.findById(plate).get().getStatus();
+        }
         Car car = carRepository.findById(plate).orElseThrow(() -> new NotFoundException("the car was not found"));
         car.setCost(cost);
         car.setMileage(mileage);
         car.setStatus(status);
         return car;
     }
+    public List<Car> getCars() {
+        return carRepository.findAll();
+    }
+
 }
 
 
