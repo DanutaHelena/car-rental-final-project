@@ -19,16 +19,16 @@ public class CarCrudService {
     private final CarRepository carRepository;
 
     public Car findByPlateNumber(String plate) {
-        return carRepository.findById(plate).orElseThrow(() -> {
-            throw new NotFoundException("Car plate number not found");
-        });
+        return carRepository.findById(plate).orElseThrow(() ->
+             new NotFoundException("Car plate number not found")
+        );
     }
 
     public Car addCar(Car car) {
         carRepository.save(car);
-        return carRepository.findById(car.getPlateNumber()).orElseThrow(() -> {
-            throw new NotFoundException("Couldn't add to the repository");
-        });
+        return carRepository.findById(car.getPlateNumber()).orElseThrow(() ->
+            new NotFoundException("Couldn't add to the repository")
+        );
     }
 
 
@@ -36,21 +36,19 @@ public class CarCrudService {
             carRepository.deleteById(plate);
     }
 
-    public Car updateCar(String plate, BigDecimal cost, Integer mileage, CarRentStatus status) {
-        if (mileage == null){
-            mileage = carRepository.findById(plate).get().getMileage();
-        }
-        if (cost == null) {
-            cost = carRepository.findById(plate).get().getCost();
-        }
-        if (status == null) {
-            status = carRepository.findById(plate).get().getStatus();
-        }
-        Car car = carRepository.findById(plate).orElseThrow(() -> new NotFoundException("the car was not found"));
-        car.setCost(cost);
-        car.setMileage(mileage);
-        car.setStatus(status);
-        return car;
+    public Car updateCar(String plate,Car car) {
+        Car car1 = carRepository.findById(plate).orElseThrow(() ->
+                new NotFoundException("The car was not found" + plate)
+        );
+        car1.setBodyType(car.getBodyType());
+        car1.setBrand(car.getBrand());
+        car1.setModel(car.getModel());
+        car1.setColour(car.getColour());
+        car1.setProductionYear(car.getProductionYear());
+        car1.setCost(car.getCost());
+        car1.setMileage(car.getMileage());
+        car1.setStatus(car.getStatus());
+        return car1;
     }
     public List<Car> getCars() {
         return carRepository.findAll();
