@@ -1,62 +1,52 @@
 package pl.sdacademy.finalproject.carrental.controller;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.sdacademy.finalproject.carrental.datalayer.RentCar;
-import pl.sdacademy.finalproject.carrental.domain.Car;
-import pl.sdacademy.finalproject.carrental.domain.CarRentStatus;
-import pl.sdacademy.finalproject.carrental.service.CarCrudService;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import pl.sdacademy.finalproject.carrental.domain.CarRental;
 import pl.sdacademy.finalproject.carrental.service.CarRentalService;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cars")
+@RequestMapping("api/rentals")
 public class CarRentalController {
 
     private final CarRentalService carRentalService;
-    private final CarCrudService carCrudService;
 
-    public CarRentalController(CarRentalService carRentalService, CarCrudService carCrudService) {
+    public CarRentalController(CarRentalService carRentalService) {
         this.carRentalService = carRentalService;
-        this.carCrudService = carCrudService;
-    }
-
-
-    @PostMapping("/rent-car")
-    public String rentCar(@ModelAttribute RentCar rentCar) {
-        return carRentalService.rent(rentCar);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Car create(@Valid @RequestBody Car car) {
-        return carCrudService.addCar(car);
-        // 201
+    public CarRental createRental(@Valid @RequestBody CarRental carRental) {
+        return carRentalService.createRental(carRental);
 
     }
-
-    @GetMapping("/{carPlate}")
-    public Car getCarByCarPlate(@PathVariable String carPlate) {
-        return carCrudService.findByPlateNumber(carPlate);
-    }
-
-    @GetMapping
-    public List<Car> getCars() {
-        return carCrudService.getCars();
-    }
-
-    @DeleteMapping("/{carPlate}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCar(@PathVariable String carPlate) {
-        carCrudService.removeCar(carPlate);
-        // dodać status NO_CONTENT-204
+    public void removeRental(@PathVariable Integer id) {
+        carRentalService.removeRental(id);
+
+    }
+    @PutMapping("/{id}")
+    public CarRental updateRental(@PathVariable Integer id, @Valid @RequestBody CarRental carRental) {
+        return carRentalService.updateRental(id, carRental);
+
+    }
+    @GetMapping
+    public List<CarRental> carRentalList(){
+        return carRentalService.getCarRentalList();
+
+    }
+    @GetMapping("/{id}")
+    public  CarRental getCarRental(@PathVariable Integer id) {
+        return  carRentalService.getCarRental(id);
     }
 
-    @PutMapping("/{carPlate}")
-    public Car updateCar(@PathVariable String carPlate, @Valid @RequestBody Car car ) {
-        return  carCrudService.updateCar(carPlate, car);
-    }
+
+
 }

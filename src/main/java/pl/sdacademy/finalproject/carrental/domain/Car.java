@@ -21,17 +21,26 @@ public class Car {
     private String plateNumber;
     @NotBlank
     private String brand;
+    @NotBlank
     private String model;
    // @Column(name = "body_type" )
+    @NotBlank
     private String bodyType;
    // @Column(name = "production_year")
+    @NotBlank
     private Integer productionYear;
+    @NotBlank
     private String colour;
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private CarRentStatus status;
     @Min(0)
     @NotNull
+    @NotBlank
     private Integer mileage;
+    @NotBlank
+    @Min(0)
+    @NotNull
     private BigDecimal cost;
 
 
