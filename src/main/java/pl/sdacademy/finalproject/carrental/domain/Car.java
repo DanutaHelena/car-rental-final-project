@@ -9,6 +9,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -42,6 +44,9 @@ public class Car {
     @Min(0)
     @NotNull
     private BigDecimal cost;
+    @OneToMany
+    @JoinColumn (name = "car_plate_number")
+    private Set<CarRental> rentals;
 
 
 }

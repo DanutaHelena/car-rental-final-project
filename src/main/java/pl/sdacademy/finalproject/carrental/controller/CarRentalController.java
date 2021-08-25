@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.sdacademy.finalproject.carrental.domain.CarRental;
+import pl.sdacademy.finalproject.carrental.model.CarRentalRequest;
 import pl.sdacademy.finalproject.carrental.service.CarRentalService;
 
 import javax.validation.Valid;
@@ -22,8 +23,8 @@ public class CarRentalController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CarRental createRental(@Valid @RequestBody CarRental carRental) {
-        return carRentalService.createRental(carRental);
+    public CarRental createRental(@Valid @RequestBody CarRentalRequest carRentalRequest) {
+        return carRentalService.createRental(carRentalRequest);
 
     }
     @DeleteMapping("/{id}")
