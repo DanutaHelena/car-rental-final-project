@@ -27,7 +27,7 @@ public class Car {
     @NotBlank
     private String bodyType;
    // @Column(name = "production_year")
-    @NotBlank
+   // @NotBlank
     private Integer productionYear;
     @NotBlank
     private String colour;

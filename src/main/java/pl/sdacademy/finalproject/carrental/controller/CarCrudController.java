@@ -2,7 +2,7 @@ package pl.sdacademy.finalproject.carrental.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.sdacademy.finalproject.carrental.datalayer.RentCar;
+//import pl.sdacademy.finalproject.carrental.datalayer.RentCar;
 import pl.sdacademy.finalproject.carrental.domain.Car;
 import pl.sdacademy.finalproject.carrental.domain.CarRentStatus;
 import pl.sdacademy.finalproject.carrental.service.CarCrudService;
