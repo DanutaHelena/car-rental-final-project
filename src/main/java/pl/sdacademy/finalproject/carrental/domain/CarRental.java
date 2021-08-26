@@ -1,8 +1,6 @@
 package pl.sdacademy.finalproject.carrental.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,19 +14,13 @@ import java.time.LocalDate;
 public class CarRental {
 
     @Id
-    @SequenceGenerator(
-            name = "generator",
-            sequenceName = "generator",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "generator"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal price;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne
     private Car car;
 

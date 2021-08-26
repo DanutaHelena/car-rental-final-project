@@ -14,8 +14,8 @@ public interface CarRentalRepository extends JpaRepository<CarRental, Integer> {
     @Query("SELECT cr from CarRental cr where cr.startDate < :startDate and cr.endDate > :endDate or" +
             " cr.startDate < :startDate and cr.endDate < :endDate or" +
             " cr.startDate > :startDate and cr.endDate < :endDate or" +
-            " cr.startDate > :startDate and cr.endDate > :endDate")
-    List<CarRental> findRentalsInDateRange(@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
+            " cr.startDate > :startDate and cr.endDate > :endDate and cr.car.plateNumber = :plate")
+    List<CarRental> findRentalsInDateRange(@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate, @Param("plate")String plate);
 
 
 }

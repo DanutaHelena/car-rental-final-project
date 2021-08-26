@@ -21,25 +21,20 @@ public class CarRentalService {
     private final CarRentalRepository carRentalRepository;
     private final CarRepository carRepository;
 
-    public CarRental createRental(CarRentalRequest carRentalRequest) {
+    public CarRental createRental(CarRentalRequest carRentalRequest) {    //podzielić na kilka metod
         Car car = carRepository.findById(carRentalRequest.getCarPlateNumber()).orElseThrow(() ->
                 new NotFoundException("Couldn't create rental"));
 
-        List<CarRental> rentals = carRentalRepository.findRentalsInDateRange(carRentalRequest.getStartDate(), carRentalRequest.getEndDate());
+        List<CarRental> rentals = carRentalRepository.findRentalsInDateRange(carRentalRequest.getStartDate(), carRentalRequest.getEndDate(), carRentalRequest.getCarPlateNumber());
 
-        List<CarRental> matchingRentals = new ArrayList<>();
 
-        for (CarRental rental : rentals) {
-            if (rental.getCar().getPlateNumber().equals(carRentalRequest.getCarPlateNumber())) {
-                matchingRentals.add(rental);
-            }
-        }
-        if (matchingRentals.isEmpty()) {
-            return new CarRental(carRentalRequest.getStartDate(),
+        if (rentals.isEmpty()) {
+            CarRental carRental = new CarRental(carRentalRequest.getStartDate(),
                     carRentalRequest.getEndDate(), carRentalRequest.getPrice(), car);
-        } else {
-            throw new NotFoundException("Couldn't create rental");
+            return carRentalRepository.save(carRental);
         }
+        throw new NotFoundException("Couldn't create rental");
+
     }
 
 

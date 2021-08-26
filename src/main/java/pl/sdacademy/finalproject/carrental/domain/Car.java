@@ -1,8 +1,7 @@
 package pl.sdacademy.finalproject.carrental.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -44,9 +43,11 @@ public class Car {
     @Min(0)
     @NotNull
     private BigDecimal cost;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany
     @JoinColumn (name = "car_plate_number")
     private Set<CarRental> rentals;
-
 
 }
