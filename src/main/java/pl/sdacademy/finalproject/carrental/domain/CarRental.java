@@ -32,5 +32,10 @@ public class CarRental {
     @ManyToOne
     private Car car;
 
-
+    public CarRental(LocalDate startDate, LocalDate endDate, BigDecimal price, Car car) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+        this.car = car;
+    }
 }

@@ -10,6 +10,7 @@ import pl.sdacademy.finalproject.carrental.domain.CarRental;
 import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
 import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,11 +22,24 @@ public class CarRentalService {
     private final CarRepository carRepository;
 
     public CarRental createRental(CarRentalRequest carRentalRequest) {
-       Car car = carRepository.findById(carRentalRequest.getCarPlateNumber()).orElseThrow();
-       
-        return carRentalRepository.findById(carRental.getId()).orElseThrow(() ->
-                new NotFoundException("Couldn't create rental")
-        );
+        Car car = carRepository.findById(carRentalRequest.getCarPlateNumber()).orElseThrow(() ->
+                new NotFoundException("Couldn't create rental"));
+
+        List<CarRental> rentals = carRentalRepository.findRentalsInDateRange(carRentalRequest.getStartDate(), carRentalRequest.getEndDate());
+
+        List<CarRental> matchingRentals = new ArrayList<>();
+
+        for (CarRental rental : rentals) {
+            if (rental.getCar().getPlateNumber().equals(carRentalRequest.getCarPlateNumber())) {
+                matchingRentals.add(rental);
+            }
+        }
+        if (matchingRentals.isEmpty()) {
+            return new CarRental(carRentalRequest.getStartDate(),
+                    carRentalRequest.getEndDate(), carRentalRequest.getPrice(), car);
+        } else {
+            throw new NotFoundException("Couldn't create rental");
+        }
     }
 
     public void removeRental(Integer id) {
