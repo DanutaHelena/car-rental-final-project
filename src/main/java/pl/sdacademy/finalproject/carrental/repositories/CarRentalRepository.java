@@ -11,7 +11,10 @@ import java.util.List;
 
 
 public interface CarRentalRepository extends JpaRepository<CarRental, Integer> {
-    @Query("SELECT cr from CarRental cr where cr.startDate < :startDate and cr.endDate > :endDate")
+    @Query("SELECT cr from CarRental cr where cr.startDate < :startDate and cr.endDate > :endDate or" +
+            " cr.startDate < :startDate and cr.endDate < :endDate or" +
+            " cr.startDate > :startDate and cr.endDate < :endDate or" +
+            " cr.startDate > :startDate and cr.endDate > :endDate")
     List<CarRental> findRentalsInDateRange(@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
 
 

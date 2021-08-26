@@ -34,13 +34,13 @@ public class Car {
     @NotBlank
     private String colour;
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    //@NotBlank
     private CarRentStatus status;
     @Min(0)
     @NotNull
-    @NotBlank
+    //@NotBlank
     private Integer mileage;
-    @NotBlank
+    //@NotBlank
     @Min(0)
     @NotNull
     private BigDecimal cost;

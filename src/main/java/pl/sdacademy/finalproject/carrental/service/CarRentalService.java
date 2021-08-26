@@ -42,6 +42,7 @@ public class CarRentalService {
         }
     }
 
+
     public void removeRental(Integer id) {
         carRentalRepository.deleteById(id);
     }
@@ -62,6 +63,7 @@ public class CarRentalService {
     public List<CarRental> getCarRentalList() {
         return carRentalRepository.findAll();
     }
+
     public CarRental getCarRental(Integer id) {
         return carRentalRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Couldn't find rental"));
