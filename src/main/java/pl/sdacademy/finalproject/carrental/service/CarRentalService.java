@@ -4,15 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.finalproject.carrental.domain.Car;
-import pl.sdacademy.finalproject.carrental.model.CarRentalRequest;
-import pl.sdacademy.finalproject.carrental.repositories.CarRentalRepository;
 import pl.sdacademy.finalproject.carrental.domain.CarRental;
 import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
+import pl.sdacademy.finalproject.carrental.model.CarRentalRequest;
+import pl.sdacademy.finalproject.carrental.repositories.CarRentalRepository;
 import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.util.ArrayList;
+import java.time.Period;
 import java.util.List;
 
 @Service

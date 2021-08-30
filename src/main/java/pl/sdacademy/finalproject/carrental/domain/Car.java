@@ -32,7 +32,7 @@ public class Car {
     private String bodyType;
 
     @Column(name = "production_year")
-    @NotBlank
+    @NotNull
     private Integer productionYear;
 
     @NotBlank
