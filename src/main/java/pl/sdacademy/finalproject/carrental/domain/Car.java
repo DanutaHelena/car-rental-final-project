@@ -53,4 +53,11 @@ public class Car {
     @JoinColumn (name = "car_plate_number")
     private Set<CarRental> rentals;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "car_plate_number")
+    private RentalBranch carBranch;
+
 }

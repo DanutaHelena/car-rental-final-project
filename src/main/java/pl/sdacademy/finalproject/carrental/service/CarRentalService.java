@@ -31,7 +31,7 @@ public class CarRentalService {
 
         if (rentals.isEmpty()) {
             BigDecimal singleDayCost = car.getCost();
-            long daysDifference = Duration.between(carRentalRequest.getStartDate(), carRentalRequest.getEndDate()).toDays() + 1;
+            Integer daysDifference = Period.between(carRentalRequest.getStartDate(), carRentalRequest.getEndDate()).getDays() + 1;
             BigDecimal totalCost = BigDecimal.valueOf(daysDifference).multiply(singleDayCost);
             CarRental carRental = new CarRental(carRentalRequest.getStartDate(),
                     carRentalRequest.getEndDate(), totalCost, car);
