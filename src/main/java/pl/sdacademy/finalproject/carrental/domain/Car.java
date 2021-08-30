@@ -17,32 +17,35 @@ import java.util.Set;
 public class Car {
 
     @Id
-    //@Column(name = "plate_number")
+    @Column(name = "plate_number")
     @NotBlank
     private String plateNumber;
+
     @NotBlank
     private String brand;
+
     @NotBlank
     private String model;
-   // @Column(name = "body_type" )
+
+    @Column(name = "body_type" )
     @NotBlank
     private String bodyType;
-   // @Column(name = "production_year")
-   // @NotBlank
+
+    @Column(name = "production_year")
+    @NotBlank
     private Integer productionYear;
+
     @NotBlank
     private String colour;
-    @Enumerated(EnumType.STRING)
-    //@NotBlank
-    private CarRentStatus status;
+
     @Min(0)
     @NotNull
-    //@NotBlank
     private Integer mileage;
-    //@NotBlank
+
     @Min(0)
     @NotNull
     private BigDecimal cost;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

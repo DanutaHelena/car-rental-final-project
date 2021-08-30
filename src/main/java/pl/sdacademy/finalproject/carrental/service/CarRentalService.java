@@ -10,6 +10,8 @@ import pl.sdacademy.finalproject.carrental.domain.CarRental;
 import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
 import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 
+import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +31,15 @@ public class CarRentalService {
 
 
         if (rentals.isEmpty()) {
+            BigDecimal singleDayCost = car.getCost();
+            long daysDifference = Duration.between(carRentalRequest.getStartDate(), carRentalRequest.getEndDate()).toDays() + 1;
+            BigDecimal totalCost = BigDecimal.valueOf(daysDifference).multiply(singleDayCost);
             CarRental carRental = new CarRental(carRentalRequest.getStartDate(),
-                    carRentalRequest.getEndDate(), carRentalRequest.getPrice(), car);
+                    carRentalRequest.getEndDate(), totalCost, car);
             return carRentalRepository.save(carRental);
         }
         throw new NotFoundException("Couldn't create rental");
-
     }
-
 
     public void removeRental(Integer id) {
         carRentalRepository.deleteById(id);

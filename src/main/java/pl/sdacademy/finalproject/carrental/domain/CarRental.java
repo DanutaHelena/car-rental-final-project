@@ -3,7 +3,6 @@ package pl.sdacademy.finalproject.carrental.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,9 +15,15 @@ public class CarRental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "start_date")
     private LocalDate startDate;
+
+    @Column(name = "end_date")
     private LocalDate endDate;
+
     private BigDecimal price;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne

@@ -4,11 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.finalproject.carrental.domain.Car;
-import pl.sdacademy.finalproject.carrental.domain.CarRentStatus;
 import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
 import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -31,7 +29,6 @@ public class CarCrudService {
         );
     }
 
-
     public void removeCar(String plate) {
             carRepository.deleteById(plate);
     }
@@ -47,13 +44,11 @@ public class CarCrudService {
         car1.setProductionYear(car.getProductionYear());
         car1.setCost(car.getCost());
         car1.setMileage(car.getMileage());
-        car1.setStatus(car.getStatus());
         return car1;
     }
     public List<Car> getCars() {
         return carRepository.findAll();
     }
-
 }
 
 
