@@ -19,8 +19,8 @@ public class RentalBranchController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RentalBranch createRentalBranch(@Valid @RequestBody RentalBranch rentalBranch) {
-        return rentalBranchService.createRentalBranch(rentalBranch);
+    public RentalBranch addRentalBranch(@Valid @RequestBody RentalBranch rentalBranch) {
+        return rentalBranchService.addRentalBranch(rentalBranch);
     }
     @PutMapping("/{id}")
     public RentalBranch updateRentalBranch(@PathVariable Integer id, @Valid @RequestBody RentalBranch rentalBranch){
@@ -31,10 +31,12 @@ public class RentalBranchController {
     public void removeRentalBranch(@PathVariable Integer id){
         rentalBranchService.removeRentalBrach(id);
     }
+
     @GetMapping
     public List<RentalBranch> rentalBranchList(){
         return rentalBranchService.getRentalBranchList();
     }
+
     @GetMapping("/{id}")
     public RentalBranch getRentalBranch (@PathVariable Integer id){
         return  rentalBranchService.findById(id);
