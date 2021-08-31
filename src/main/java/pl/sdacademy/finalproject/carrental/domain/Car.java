@@ -57,7 +57,6 @@ public class Car {
     @ToString.Exclude
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "car_plate_number")
     private RentalBranch carBranch;
 
 }

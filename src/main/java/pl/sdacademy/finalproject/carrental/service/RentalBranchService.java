@@ -16,6 +16,7 @@ import java.util.List;
 public class RentalBranchService {
 
     private final RentalBranchRepository rentalBranchRepository;
+    private final CarRepository carRepository;
 
     public RentalBranch findById(Integer id){
         return rentalBranchRepository.findById(id).orElseThrow(() ->
