@@ -42,4 +42,9 @@ public class RentalBranchController {
         return  rentalBranchService.findById(id);
     }
 
+    @PostMapping("/{branchId}/cars/{carId}")
+    public RentalBranch addCarToBranch(@PathVariable("branchId") Integer id, @PathVariable("carId") String carPlateNumber ){
+        return rentalBranchService.addCarToBranch(id, carPlateNumber);
+    }
+
 }

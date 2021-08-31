@@ -13,16 +13,13 @@ import java.util.Set;
 @NoArgsConstructor
 public class RentalBranch {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @NotBlank
+    private String city;
 
-    private String localization;
-
-
-    public RentalBranch(String localization) {
-        this.localization = localization;
-    }
+    @NotBlank
+    private String address;
 
     @OneToMany
-    private Set<Car> car;
+    @JoinColumn(name = "car_plate_number")
+    private Set<Car> cars;
 }

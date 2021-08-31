@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.finalproject.carrental.domain.RentalBranch;
 import pl.sdacademy.finalproject.carrental.exceptions.NotFoundException;
+import pl.sdacademy.finalproject.carrental.repositories.CarRepository;
 import pl.sdacademy.finalproject.carrental.repositories.RentalBranchRepository;
 
 import java.util.List;
@@ -20,24 +21,34 @@ public class RentalBranchService {
         return rentalBranchRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Couldn't find localization"));
     }
+
     public RentalBranch addRentalBranch(RentalBranch rentalBranch) {
-        rentalBranchRepository.save(rentalBranch);
-        return rentalBranchRepository.findById(rentalBranch.getId()).orElseThrow(()->
-                new NotFoundException("Couldn't add new branch"));
+        return rentalBranchRepository.save(rentalBranch);
     }
-    public RentalBranch updateRentalBranch(Integer id, RentalBranch rentalBranch) {
-        RentalBranch rentalBranch1 = rentalBranchRepository.findById(id).orElseThrow(()->
+
+    public RentalBranch updateRentalBranch(Integer id, RentalBranch rentalBranchToUpdate) {
+        RentalBranch existingRentalBranch = rentalBranchRepository.findById(id).orElseThrow(()->
                 new NotFoundException("Couldn't find branch by id: " + id));
 
-        rentalBranch1.setLocalization(rentalBranch.getLocalization());
-
-        return rentalBranch1;
+        existingRentalBranch.setCity(rentalBranchToUpdate.getCity());
+        existingRentalBranch.setAddress(rentalBranchToUpdate.getAddress());
+        return existingRentalBranch;
     }
 
     public List<RentalBranch> getRentalBranchList() {
         return rentalBranchRepository.findAll();
     }
+
     public void removeRentalBranch(Integer id) {
         rentalBranchRepository.deleteById(id);
+    }
+
+    public RentalBranch addCarToBranch (Integer branchId, String carId) {
+        RentalBranch branch = rentalBranchRepository.findByIdWithCars(branchId).orElseThrow(()->
+                new NotFoundException("Couldn't find cars"));
+        branch.getCars().stream().anyMatch((car)-> car.getPlateNumber().equals(carId));
+        branch.getCars().add(carRepository.getById(carId));
+
+        return branch;
     }
 }

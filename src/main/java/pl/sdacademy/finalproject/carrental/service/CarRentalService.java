@@ -65,4 +65,5 @@ public class CarRentalService {
         return carRentalRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Couldn't find rental"));
     }
+
 }
