@@ -29,7 +29,7 @@ public class RentalBranchController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeRentalBranch(@PathVariable Integer id){
-        rentalBranchService.removeRentalBrach(id);
+        rentalBranchService.removeRentalBranch(id);
     }
 
     @GetMapping
