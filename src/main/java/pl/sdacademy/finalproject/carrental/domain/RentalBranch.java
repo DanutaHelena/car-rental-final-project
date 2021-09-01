@@ -22,6 +22,6 @@ public class RentalBranch {
     private String address;
 
     @OneToMany
-    @JoinColumn(name = "car_plate_number")
-    private Set<Car> cars;
+    @JoinColumn(name = "city")
+    private Set<Car> cars = new HashSet<>();
 }

@@ -35,4 +35,6 @@ public class CarRental {
         this.price = price;
         this.car = car;
     }
+
+
 }
