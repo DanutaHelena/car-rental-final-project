@@ -7,7 +7,7 @@ import pl.sdacademy.finalproject.carrental.domain.RentalBranch;
 
 import java.util.Optional;
 
-public interface RentalBranchRepository extends JpaRepository<RentalBranch, Integer> {
-    @Query("SELECT rb from RentalBranch rb left join fetch rb.cars where rb.id = :id")
-    Optional<RentalBranch> findByIdWithCars(@Param("id") Integer id);
+public interface RentalBranchRepository extends JpaRepository<RentalBranch, String> {
+    @Query("SELECT rb from RentalBranch rb left join fetch rb.cars where rb.city = :city")
+    Optional<RentalBranch> findByIdWithCars(@Param("city") String city);
     }

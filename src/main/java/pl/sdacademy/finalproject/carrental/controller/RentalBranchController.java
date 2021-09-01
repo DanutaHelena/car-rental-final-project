@@ -22,14 +22,14 @@ public class RentalBranchController {
     public RentalBranch addRentalBranch(@Valid @RequestBody RentalBranch rentalBranch) {
         return rentalBranchService.addRentalBranch(rentalBranch);
     }
-    @PutMapping("/{id}")
-    public RentalBranch updateRentalBranch(@PathVariable Integer id, @Valid @RequestBody RentalBranch rentalBranch){
-        return rentalBranchService.updateRentalBranch(id, rentalBranch);
+    @PutMapping("/{city}")
+    public RentalBranch updateRentalBranch(@PathVariable String city, @Valid @RequestBody RentalBranch rentalBranch){
+        return rentalBranchService.updateRentalBranch(city, rentalBranch);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{city}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeRentalBranch(@PathVariable Integer id){
-        rentalBranchService.removeRentalBranch(id);
+    public void removeRentalBranch(@PathVariable String city){
+        rentalBranchService.removeRentalBranch(city);
     }
 
     @GetMapping
@@ -37,13 +37,13 @@ public class RentalBranchController {
         return rentalBranchService.getRentalBranchList();
     }
 
-    @GetMapping("/{id}")
-    public RentalBranch getRentalBranch (@PathVariable Integer id){
-        return  rentalBranchService.findById(id);
+    @GetMapping("/{city}")
+    public RentalBranch getRentalBranch (@PathVariable String city){
+        return  rentalBranchService.findById(city);
     }
 
     @PostMapping("/{branchId}/cars/{carId}")
-    public RentalBranch addCarToBranch(@PathVariable("branchId") Integer id, @PathVariable("carId") String carPlateNumber ){
+    public RentalBranch addCarToBranch(@PathVariable("branchId") String id, @PathVariable("carId") String carPlateNumber ){
         return rentalBranchService.addCarToBranch(id, carPlateNumber);
     }
 

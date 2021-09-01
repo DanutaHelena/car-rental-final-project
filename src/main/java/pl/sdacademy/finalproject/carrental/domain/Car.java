@@ -59,4 +59,5 @@ public class Car {
     @ManyToOne
     private RentalBranch carBranch;
 
+
 }
