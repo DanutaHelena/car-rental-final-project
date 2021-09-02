@@ -55,8 +55,7 @@ public class RentalBranchService {
         }
         Car car = carRepository.findById(carId).orElseThrow(() -> new NotFoundException("Car not found"));
         branch.getCars().add(car);
-        //car.getCarBranch().getCity();
+        car.setCarBranch(branch);
         return branch;
     }
-
 }
